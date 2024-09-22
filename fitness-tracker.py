@@ -36,7 +36,7 @@ class FitnessTracker:
         print(f"Active time: {self.active_time:.2f} minutes")
         print("-------------------------------")
 
-# Example Usage
+# Example Usage.
 def main():
     user_name = input("Enter your name: ")
     tracker = FitnessTracker(user_name)
