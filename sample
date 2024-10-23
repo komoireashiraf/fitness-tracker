@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three.js Example</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      // Create a scene
+      const scene = new THREE.Scene();
+
+      // Create a camera
+      const camera = new THREE.PerspectiveCamera(
+        75, // Field of view
+        window.innerWidth / window.innerHeight, // Aspect ratio
+        0.1, // Near clipping plane
+        1000 // Far clipping plane
+      );
+      camera.position.z = 5;
+
+      // Create a WebGL renderer
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.body.appendChild(renderer.domElement);
+
+      // Create a geometry (a box in this case)
+      const geometry = new THREE.BoxGeometry(1, 1, 1);
+
+      // Create a material (basic color for the box)
+      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+
+      // Create a mesh (combines geometry and material)
+      const cube = new THREE.Mesh(geometry, material);
+
+      // Add the cube to the scene
+      scene.add(cube);
+
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+
+        // Rotate the cube for animation
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+
+        // Render the scene from the camera's perspective
+        renderer.render(scene, camera);
+      }
+
+      animate();
+
+      // Handle window resizing
+      window.addEventListener('resize', () => {
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+      });
+    </script>
+  </body>
+</html>
